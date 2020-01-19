@@ -10,14 +10,17 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // https://www.cnblogs.com/jack-zhou21235/p/12010088.html
 
+const OUTPUT_PATH = path.resolve(__dirname, '../dist');
 
 module.exports = {
-    mode: 'none',
+    mode: 'production',
     // entry: './index.jsx',
     // output: {
     //     filename: 'index.js',
     //     path: path.resolve(__dirname, 'dist')
     // },
+    // 构建代码映射源码，用于查错
+    // devtool: 'inline-source-map',
 
     // 多入口模式配置
     entry: {
@@ -26,7 +29,7 @@ module.exports = {
 
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: OUTPUT_PATH
     },
 
     resolve: {
@@ -73,10 +76,8 @@ module.exports = {
         ],
     },
 
-    // 构建代码映射源码，用于查错
-    devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: OUTPUT_PATH,
         // compress: true,
         port: 4321,
         clientLogLevel: 'none'
